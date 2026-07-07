@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260707l">
+  <link rel="stylesheet" href="css/style.css?v=20260707t">
   <link rel="icon" href="images/ionix-logo.png" type="image/png">
 </head>
 <body>
@@ -101,7 +101,7 @@
   </section>
 
   <!-- About — Loadex mosaic layout -->
-  <section class="about section--grid section--grid-texture" id="about">
+  <section class="about section--surface" id="about">
     <div class="container">
       <span class="eyebrow">About Ionix</span>
       <h2 class="about__headline">Ionix Systems designs and manufactures <em>cable harnesses, RF assemblies and fibre optic solutions</em> for the world's most demanding industries.</h2>
@@ -172,7 +172,7 @@
   </section>
 
   <!-- Core Services — Loadex equipment card style, 3-col -->
-  <section class="core-services section--grid" id="core-services">
+  <section class="core-services section--grid-texture" id="core-services">
     <div class="container">
       <div class="section-head-row">
         <div>
@@ -254,7 +254,7 @@
   </section>
 
   <!-- Sectors -->
-  <section class="sectors section--grid-texture" id="sectors">
+  <section class="sectors section--surface" id="sectors">
     <div class="container">
       <div class="sectors__head">
         <span class="eyebrow">Sectors We Serve</span>
@@ -315,7 +315,7 @@
   </section>
 
   <!-- Testimonials -->
-  <section class="testimonials section--grid" id="testimonials" aria-label="Client testimonials">
+  <section class="testimonials section--grid-texture" id="testimonials" aria-label="Client testimonials">
     <div class="container">
       <header class="section-head-row testimonials__head">
         <div>
@@ -490,7 +490,7 @@
   </section>
 
   <!-- Certifications -->
-  <section class="certifications section--grid section--grid-texture" id="certifications">
+  <section class="certifications section--surface" id="certifications">
     <div class="container">
       <header class="certifications__header">
         <div class="certifications__intro">
@@ -642,7 +642,7 @@
   </section>
 
   <!-- Insights -->
-  <section class="insights section--grid" id="insights">
+  <section class="insights section--grid-texture" id="insights">
     <div class="container">
       <div class="section-head-row">
         <div>
@@ -651,7 +651,14 @@
         </div>
         <a href="#" class="btn btn--primary">View All Articles</a>
       </div>
-      <div class="insights__grid">
+      <div class="insights__carousel">
+        <button class="insights__nav insights__nav--prev" type="button" aria-label="Show previous articles" disabled>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true">
+            <path d="M13 6l-6 6 6 6"/><path d="M19 6l-6 6 6 6"/>
+          </svg>
+        </button>
+        <div class="insights__viewport">
+          <div class="insights__track" id="insights-track">
         <article class="insight-card">
           <!-- PLACEHOLDER — DO NOT PUBLISH -->
           <img src="images/service-harness.png" alt="Cable harness assembly with multi-pin connectors">
@@ -682,6 +689,13 @@
             <a href="#" class="insight-card__btn">Read Full Article</a>
           </div>
         </article>
+          </div>
+        </div>
+        <button class="insights__nav insights__nav--next" type="button" aria-label="Show next articles">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" aria-hidden="true">
+            <path d="M5 6l6 6-6 6"/><path d="M11 6l6 6-6 6"/>
+          </svg>
+        </button>
       </div>
     </div>
   </section>

@@ -81,4 +81,29 @@
   document.querySelectorAll('form').forEach(function (form) {
     form.addEventListener('submit', function (e) { e.preventDefault(); });
   });
+
+  var insightsTrack = document.getElementById('insights-track');
+  var insightsPrev = document.querySelector('.insights__nav--prev');
+  var insightsNext = document.querySelector('.insights__nav--next');
+
+  if (insightsTrack && insightsPrev && insightsNext) {
+    function updateInsightsNav() {
+      var maxScroll = insightsTrack.scrollWidth - insightsTrack.clientWidth;
+      insightsPrev.disabled = insightsTrack.scrollLeft <= 4;
+      insightsNext.disabled = insightsTrack.scrollLeft >= maxScroll - 4;
+    }
+
+    function scrollInsights(direction) {
+      var card = insightsTrack.querySelector('.insight-card');
+      if (!card) return;
+      var scrollAmount = card.offsetWidth + parseFloat(getComputedStyle(insightsTrack).gap || 0);
+      insightsTrack.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+
+    insightsPrev.addEventListener('click', function () { scrollInsights(-1); });
+    insightsNext.addEventListener('click', function () { scrollInsights(1); });
+    insightsTrack.addEventListener('scroll', updateInsightsNav, { passive: true });
+    window.addEventListener('resize', updateInsightsNav);
+    updateInsightsNav();
+  }
 })();
