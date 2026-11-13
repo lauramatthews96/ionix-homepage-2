@@ -10,14 +10,53 @@
     navToggle.addEventListener('click', function () {
       var isOpen = siteNav.classList.toggle('open');
       navToggle.setAttribute('aria-expanded', isOpen);
+      if (!isOpen) {
+        siteNav.querySelectorAll('.nav-item.is-open').forEach(function (item) {
+          item.classList.remove('is-open');
+          var toggle = item.querySelector('.nav-link--toggle');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+      }
     });
     siteNav.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
-        siteNav.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
+        var href = link.getAttribute('href') || '';
+        // Only close the drawer for in-page anchors. Full page links must
+        // navigate uninterrupted — closing mid-click can cancel the load.
+        if (href.charAt(0) === '#') {
+          siteNav.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        }
       });
     });
   }
+
+  var dropdownItems = document.querySelectorAll('.nav-item.has-dropdown');
+  dropdownItems.forEach(function (item) {
+    var toggle = item.querySelector('.nav-link--toggle');
+    if (!toggle) return;
+    toggle.addEventListener('click', function (event) {
+      event.preventDefault();
+      var willOpen = !item.classList.contains('is-open');
+      dropdownItems.forEach(function (other) {
+        if (other === item) return;
+        other.classList.remove('is-open');
+        var otherToggle = other.querySelector('.nav-link--toggle');
+        if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
+      });
+      item.classList.toggle('is-open', willOpen);
+      toggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    });
+  });
+
+  document.addEventListener('click', function (event) {
+    if (event.target.closest('.nav-item.has-dropdown') || event.target.closest('.nav-toggle')) return;
+    dropdownItems.forEach(function (item) {
+      item.classList.remove('is-open');
+      var toggle = item.querySelector('.nav-link--toggle');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
 
   if (navbar && heroSection) {
     window.addEventListener('scroll', function () {
@@ -30,13 +69,19 @@
   var navLinks = document.querySelectorAll('.nav-link');
 
   function updateActiveNav() {
+    var hashLinks = Array.prototype.filter.call(navLinks, function (link) {
+      var href = link.getAttribute('href') || '';
+      return href.charAt(0) === '#';
+    });
+    if (!hashLinks.length) return;
+
     var scrollPos = window.scrollY + 140;
     sections.forEach(function (section) {
       var top = section.offsetTop;
       var height = section.offsetHeight;
       var id = section.getAttribute('id');
       if (scrollPos >= top && scrollPos < top + height) {
-        navLinks.forEach(function (link) {
+        hashLinks.forEach(function (link) {
           link.classList.toggle('active', link.getAttribute('href') === '#' + id);
         });
       }
@@ -69,12 +114,21 @@
     });
   });
 
-  document.querySelectorAll('.contact-band__pills .pill').forEach(function (pill) {
-    pill.addEventListener('click', function () {
-      document.querySelectorAll('.contact-band__pills .pill').forEach(function (p) {
-        p.classList.remove('pill--active');
+  document.querySelectorAll('.contact-band__pills').forEach(function (group) {
+    var formCol = group.closest('.locations-contact__form-col');
+    var form = formCol ? formCol.querySelector('form') : null;
+    var typeInput = form ? form.querySelector('input[name="project_type"]') : null;
+
+    group.querySelectorAll('.pill').forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        group.querySelectorAll('.pill').forEach(function (p) {
+          p.classList.remove('pill--active');
+          p.setAttribute('aria-pressed', 'false');
+        });
+        pill.classList.add('pill--active');
+        pill.setAttribute('aria-pressed', 'true');
+        if (typeInput) typeInput.value = pill.textContent.trim();
       });
-      pill.classList.add('pill--active');
     });
   });
 
@@ -106,4 +160,24 @@
     window.addEventListener('resize', updateInsightsNav);
     updateInsightsNav();
   }
+
+  document.querySelectorAll('.hero-video-card').forEach(function (card) {
+    var playBtn = card.querySelector('.hero-video-card__play');
+    var frame = card.querySelector('.hero-video-card__frame');
+    var videoId = card.getAttribute('data-vimeo-id');
+    if (!playBtn || !frame || !videoId) return;
+
+    playBtn.addEventListener('click', function () {
+      if (card.classList.contains('is-playing')) return;
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://player.vimeo.com/video/' + videoId +
+        '?autoplay=1&title=0&byline=0&portrait=0';
+      iframe.title = 'Ionix manufacturing video';
+      iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+      iframe.setAttribute('allowfullscreen', '');
+      frame.hidden = false;
+      frame.appendChild(iframe);
+      card.classList.add('is-playing');
+    });
+  });
 })();

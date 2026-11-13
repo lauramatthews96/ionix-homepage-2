@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260707t">
+  <link rel="stylesheet" href="css/style.css?v=20261112bs">
   <link rel="icon" href="images/ionix-logo.png" type="image/png">
 </head>
 <body>
@@ -37,7 +37,7 @@
     <header class="navbar" id="navbar">
       <div class="container nav-menu-wrapper">
         <a href="#home" class="brand">
-          <img src="images/ionix-logo.png" alt="Ionix Systems" class="brand__logo">
+          <img src="images/ionix-logo.svg" alt="Ionix Systems — An Amphenol Company" class="brand__logo">
         </a>
         <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -45,12 +45,26 @@
         <nav class="site-nav" aria-label="Main navigation">
           <ul class="nav-menu">
             <li><a href="#home" class="nav-link active">Home</a></li>
-            <li><a href="#about" class="nav-link">About Us</a></li>
-            <li><a href="#sectors" class="nav-link">Sectors</a></li>
-            <li><a href="#core-services" class="nav-link">Services</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
+            <li class="nav-item has-dropdown">
+              <button type="button" class="nav-link nav-link--toggle" aria-expanded="false" aria-haspopup="true">About</button>
+              <ul class="nav-dropdown" role="list">
+                <li><a href="about/" class="nav-dropdown__link">The Team</a></li>
+                <li><a href="markets/" class="nav-dropdown__link">Markets</a></li>
+                <li><a href="quality/" class="nav-dropdown__link">Quality</a></li>
+              </ul>
+            </li>
+            <li class="nav-item has-dropdown">
+              <button type="button" class="nav-link nav-link--toggle" aria-expanded="false" aria-haspopup="true">Products</button>
+              <ul class="nav-dropdown" role="list">
+                <li><a href="rf-assemblies/" class="nav-dropdown__link">RF Assemblies</a></li>
+                <li><a href="cable-harnesses/" class="nav-dropdown__link">Cable Harnessing</a></li>
+                <li><a href="fibre-optics/" class="nav-dropdown__link">Fibre Optics</a></li>
+              </ul>
+            </li>
+            <li><a href="gallery/" class="nav-link">Gallery</a></li>
+            <li><a href="blog/" class="nav-link">News</a></li>
           </ul>
-          <a href="#contact" class="nav-button">Contact Us</a>
+          <a href="contact/" class="nav-button">Contact Us</a>
         </nav>
       </div>
     </header>
@@ -112,7 +126,7 @@
         <div class="about__col">
           <!-- PLACEHOLDER — DO NOT PUBLISH -->
           <img src="images/about-right.png" alt="Laser cable assembly work" class="about__img about__img--left">
-          <a href="#contact" class="primary-button about__btn">Learn More</a>
+          <a href="about/" class="primary-button about__btn">Learn More</a>
         </div>
         <!-- PLACEHOLDER — DO NOT PUBLISH -->
         <img src="images/about-center.png" alt="Precision fibre braiding manufacturing" class="about__img about__img--center">
@@ -200,7 +214,7 @@
               <div><span>Standard</span><strong>IPC/WHMA-A-620</strong></div>
             </div>
             <p>Custom-engineered wiring harnesses built to exacting specifications for the most demanding applications.</p>
-            <a href="#contact" class="equipment-card__arrow" aria-label="Learn more about Cable Harnesses">
+            <a href="cable-harnesses/" class="equipment-card__arrow" aria-label="Learn more about Cable Harnesses">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
           </div>
@@ -222,7 +236,7 @@
               <div><span>Testing</span><strong>Phase-Matched &amp; Insertion Loss</strong></div>
             </div>
             <p>High-performance RF cable assemblies including low-loss, phase-matched, wide frequency spectrum, semi-rigid and high-power builds, verified using automated phase-matching and insertion loss testers.</p>
-            <a href="#contact" class="equipment-card__arrow" aria-label="Learn more about RF Assemblies">
+            <a href="rf-assemblies/" class="equipment-card__arrow" aria-label="Learn more about RF Assemblies">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
           </div>
@@ -244,7 +258,7 @@
               <div><span>Partner</span><strong>Amphenol Fibre Systems International (AFSI)</strong></div>
             </div>
             <p>European fibre optic interconnect design and manufacture, including our high-density MT Fibre Optic Assembly supporting up to 72 channels.</p>
-            <a href="#contact" class="equipment-card__arrow" aria-label="Learn more about Fibre Optic Assemblies">
+            <a href="fibre-optics/" class="equipment-card__arrow" aria-label="Learn more about Fibre Optic Assemblies">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
           </div>
@@ -256,13 +270,16 @@
   <!-- Sectors -->
   <section class="sectors section--surface" id="sectors">
     <div class="container">
-      <div class="sectors__head">
-        <span class="eyebrow">Sectors We Serve</span>
-        <h2 class="section-title">Built for aerospace, defence, marine and medical.</h2>
-        <p class="sectors__intro">Flight-critical interconnect solutions engineered for the environments where reliability is non-negotiable.</p>
+      <div class="section-head-row">
+        <div>
+          <span class="eyebrow">Sectors We Serve</span>
+          <h2 class="section-title">Built for aerospace, defence, marine and medical.</h2>
+          <p class="sectors__intro">Flight-critical interconnect solutions engineered for the environments where reliability is non-negotiable.</p>
+        </div>
+        <a href="markets/" class="btn btn--primary">View Markets</a>
       </div>
       <div class="sectors__grid">
-        <a href="#contact" class="sector-card" aria-label="Learn more about Aerospace">
+        <a href="markets/#primary-markets" class="sector-card" aria-label="Learn more about Aerospace">
           <!-- PLACEHOLDER — DO NOT PUBLISH -->
           <img src="images/sector-aerospace.jpg" alt="" class="sector-card__img">
           <span class="sector-card__overlay" aria-hidden="true"></span>
@@ -274,7 +291,7 @@
             <p>Flight-critical cable and RF assemblies engineered to the highest tolerances.</p>
           </div>
         </a>
-        <a href="#contact" class="sector-card" aria-label="Learn more about Defence">
+        <a href="markets/#primary-markets" class="sector-card" aria-label="Learn more about Defence">
           <!-- PLACEHOLDER — DO NOT PUBLISH -->
           <img src="images/sector-defense.jpg" alt="" class="sector-card__img">
           <span class="sector-card__overlay" aria-hidden="true"></span>
@@ -286,7 +303,7 @@
             <p>Mission-ready systems built for reliability in extreme conditions.</p>
           </div>
         </a>
-        <a href="#contact" class="sector-card" aria-label="Learn more about Naval and Marine">
+        <a href="markets/#primary-markets" class="sector-card" aria-label="Learn more about Naval and Marine">
           <!-- PLACEHOLDER — DO NOT PUBLISH -->
           <img src="images/sector-naval.jpg" alt="" class="sector-card__img">
           <span class="sector-card__overlay" aria-hidden="true"></span>
@@ -298,7 +315,7 @@
             <p>Corrosion-resistant harnessing designed for marine environments.</p>
           </div>
         </a>
-        <a href="#contact" class="sector-card" aria-label="Learn more about Medical">
+        <a href="markets/" class="sector-card" aria-label="Learn more about Medical and other markets">
           <!-- PLACEHOLDER — DO NOT PUBLISH -->
           <img src="images/sector-medical.jpg" alt="" class="sector-card__img">
           <span class="sector-card__overlay" aria-hidden="true"></span>
@@ -492,7 +509,7 @@
   <!-- Certifications -->
   <section class="certifications section--surface" id="certifications">
     <div class="container">
-      <header class="certifications__header">
+      <div class="section-head-row">
         <div class="certifications__intro">
           <h2 class="certifications__title">Certifications &amp; Standards</h2>
           <p class="certifications__lead">
@@ -500,7 +517,8 @@
             <span class="certifications__lead-locations">Across Manchester and Estonia</span>
           </p>
         </div>
-      </header>
+        <a href="quality/" class="btn btn--primary">View Quality &amp; Assurance</a>
+      </div>
 
       <div class="cert-tabs" role="tablist" aria-label="Certification categories">
         <button class="cert-tabs__btn is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-uk" id="tab-uk" data-panel="panel-uk">UK</button>
@@ -649,7 +667,7 @@
           <span class="eyebrow">Technical Insights from the Assembly Floor</span>
           <h2 class="section-title">Expert knowledge for engineering decision-makers.</h2>
         </div>
-        <a href="#" class="btn btn--primary">View All Articles</a>
+        <a href="blog/" class="btn btn--primary">View All Articles</a>
       </div>
       <div class="insights__carousel">
         <button class="insights__nav insights__nav--prev" type="button" aria-label="Show previous articles" disabled>
@@ -660,33 +678,33 @@
         <div class="insights__viewport">
           <div class="insights__track" id="insights-track">
         <article class="insight-card">
-          <!-- PLACEHOLDER — DO NOT PUBLISH -->
+          <!-- PLACEHOLDER — confirm real articles/dates with Ionix before launch -->
           <img src="images/service-harness.png" alt="Cable harness assembly with multi-pin connectors">
           <div class="insight-card__body">
             <span class="insight-card__category">Aerospace</span>
             <h3>Why Cable Harness Design Matters Before Production Begins</h3>
             <time datetime="2026-01-21">Jan 21, 2026</time>
-            <a href="#" class="insight-card__btn">Read Full Article</a>
+            <a href="blog/why-cable-harness-design-matters/" class="insight-card__btn">Read Full Article</a>
           </div>
         </article>
         <article class="insight-card">
-          <!-- PLACEHOLDER — DO NOT PUBLISH -->
+          <!-- PLACEHOLDER — confirm real articles/dates with Ionix before launch -->
           <img src="images/service-rf.png" alt="RF coaxial cable assembly">
           <div class="insight-card__body">
             <span class="insight-card__category">Quality</span>
             <h3>How Material Selection Impacts RF Assembly Performance</h3>
             <time datetime="2026-01-21">Jan 21, 2026</time>
-            <a href="#" class="insight-card__btn">Read Full Article</a>
+            <a href="blog/material-selection-rf-assembly-performance/" class="insight-card__btn">Read Full Article</a>
           </div>
         </article>
         <article class="insight-card">
-          <!-- PLACEHOLDER — DO NOT PUBLISH -->
+          <!-- PLACEHOLDER — confirm real articles/dates with Ionix before launch -->
           <img src="images/sector-defense.jpg" alt="Defence tactical vehicle in rugged terrain">
           <div class="insight-card__body">
             <span class="insight-card__category">Defence</span>
             <h3>AS9100 Explained — What It Means for Our Customers</h3>
             <time datetime="2026-01-21">Jan 21, 2026</time>
-            <a href="#" class="insight-card__btn">Read Full Article</a>
+            <a href="blog/as9100-explained-for-customers/" class="insight-card__btn">Read Full Article</a>
           </div>
         </article>
           </div>
@@ -703,25 +721,25 @@
   <footer class="site-footer">
     <div class="container site-footer__grid">
       <div class="site-footer__brand">
-        <img src="images/ionix-logo.png" alt="Ionix Systems" class="footer-logo">
+        <img src="images/ionix-logo.svg" alt="Ionix Systems — An Amphenol Company" class="footer-logo">
         <p>Precision Engineering for the World's Most Demanding Industries</p>
       </div>
       <div class="site-footer__col">
         <h4>Company</h4>
-        <ul><li><a href="#about">About Us</a></li><li><a href="#">Leadership</a></li><li><a href="#testimonials">Clients</a></li></ul>
+        <ul><li><a href="about/">About Us</a></li><li><a href="partners/">Partners</a></li><li><a href="quality/">Quality</a></li></ul>
       </div>
       <div class="site-footer__col">
         <h4>Sectors</h4>
-        <ul><li><a href="#sectors">Aerospace</a></li><li><a href="#sectors">Defence</a></li><li><a href="#sectors">Naval &amp; Marine</a></li><li><a href="#sectors">Medical</a></li></ul>
+        <ul><li><a href="markets/">Aerospace</a></li><li><a href="markets/">Defence</a></li><li><a href="markets/">Naval &amp; Marine</a></li><li><a href="markets/">Medical</a></li></ul>
       </div>
       <div class="site-footer__col">
         <h4>Services</h4>
-        <ul><li><a href="#core-services">Cable Harnesses</a></li><li><a href="#core-services">RF Assemblies</a></li><li><a href="#core-services">Fibre Optic Assemblies</a></li><li><a href="#contact">Installation &amp; Commissioning</a></li></ul>
+        <ul><li><a href="manufacturing/">Manufacturing</a></li><li><a href="cable-harnesses/">Cable Harnesses</a></li><li><a href="rf-assemblies/">RF Assemblies</a></li><li><a href="fibre-optics/">Fibre Optics</a></li><li><a href="#contact">Installation &amp; Commissioning</a></li></ul>
       </div>
       <div class="site-footer__col site-footer__contact">
         <h4>Contact</h4>
         <p><strong>Manchester HQ</strong><br>Prospect House, Risley, Warrington WA3 6HP</p>
-        <p><strong>Estonia</strong><br>Manufacturing facility — address TBC</p>
+        <p><strong>Estonia</strong><br>Ionix Systems OÜ<br>Pikk 59b, Kuressaare 93815, Saare maakond</p>
         <p><a href="tel:+441942685200">+44 (0) 1942 685200</a></p>
         <p><a href="mailto:sales@ionix-systems.com">sales@ionix-systems.com</a></p>
         <div class="site-footer__social">
@@ -740,6 +758,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=20261112ar"></script>
 </body>
 </html>
