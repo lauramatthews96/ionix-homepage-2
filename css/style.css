@@ -323,12 +323,12 @@ address { font-style: normal; }
   transition: transform 0.2s ease;
 }
 .nav-item.is-open > .nav-link--toggle::after,
-.nav-item:hover > .nav-link--toggle::after {
+.nav-item:focus-within > .nav-link--toggle::after {
   transform: translateY(1px) rotate(225deg);
 }
 .nav-dropdown {
   position: absolute;
-  top: calc(100% - 0.25rem);
+  top: 100%;
   left: 0;
   min-width: 13.5rem;
   margin: 0;
@@ -339,16 +339,37 @@ address { font-style: normal; }
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.1);
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transform: translateY(0.35rem);
   transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
   z-index: 320;
 }
-.nav-item:hover > .nav-dropdown,
-.nav-item:focus-within > .nav-dropdown,
-.nav-item.is-open > .nav-dropdown {
+/* Bridge the gap so the menu stays open while moving from label → links */
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -0.75rem;
+  height: 0.75rem;
+}
+.nav-item.is-open > .nav-dropdown,
+.nav-item:focus-within > .nav-dropdown {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
   transform: translateY(0);
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav-item:hover > .nav-link--toggle::after {
+    transform: translateY(1px) rotate(225deg);
+  }
+  .nav-item:hover > .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
 }
 .nav-dropdown__link {
   display: block;
@@ -568,15 +589,19 @@ address { font-style: normal; }
     background: transparent;
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
     transform: none;
     display: none;
   }
+  .nav-dropdown::before { display: none; }
   .nav-item:hover > .nav-dropdown,
   .nav-item:focus-within > .nav-dropdown {
     display: none;
+    pointer-events: none;
   }
   .nav-item.is-open > .nav-dropdown {
     display: block;
+    pointer-events: auto;
   }
   .nav-dropdown__link { padding: 0.55rem 0; }
   .nav-button { width: 100%; height: auto; padding: 14px; margin-top: 1rem; }
